@@ -108,7 +108,7 @@ O `threshold=0.1` foi utilizado para binarizar as predições. Isso ajuda a capt
 
 ## 📎 Referência
 
-- Dataset: [DRIVE - Digital Retinal Images for Vessel Extraction](https://drive.grand-challenge.org/)
+- Dataset: [DRIVE - Digital Retinal Images for Vessel Extraction](https://www.kaggle.com/datasets/andrewmvd/drive-digital-retinal-images-for-vessel-extraction?resource=download)
 - Artigos:
   - U-Net: *Ronneberger et al., 2015*
   - U-Net++: *Zhou et al., 2018*
