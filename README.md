@@ -1,4 +1,4 @@
-# Link do Prtojeto:
+# Link do Projeto:
 (https://colab.research.google.com/drive/1G1bYMqgHySTBupL3LFSdbrB8uXosiKhp?usp=sharing)
 
 # Segmentação de Vasos Retinianos com U-Net e U-Net++
