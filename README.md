@@ -133,7 +133,9 @@ print(f"Máscaras de treinamento carregadas: {train_masks.shape}")
   
 - Aumento de dados com `ImageDataGenerator`.
   ### visulização das imagens geradas:
-  <img width="324" height="356" alt="image" src="https://github.com/user-attachments/assets/54b3a14c-adc1-419c-a13f-7cb0685e299f" />
+  
+  <img width="1213" height="634" alt="image" src="https://github.com/user-attachments/assets/bdc39b8f-9006-472e-9ce9-eb9017e43e5d" />
+  <img width="1211" height="651" alt="image" src="https://github.com/user-attachments/assets/6e6dbf93-9a1e-4fec-8785-c2af8454e86d" />
 
 ## 🧠 Modelos Utilizados
 
