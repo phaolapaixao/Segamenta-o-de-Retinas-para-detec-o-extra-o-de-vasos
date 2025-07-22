@@ -16,7 +16,7 @@ O objetivo é identificar estruturas importantes – como vasos sanguíneos – 
 
 Esse projeto é composto por 40 imagens, 20 de teste e 20 de treino, o que é pouco para um bom treinamento, por isso foi necessário gerar novos dados a partir das patches, as patchs foram essenciais para esse projeto, uma vez que as imagens originaris tinham proporções de 584x565, porem o colab tradicional limita para no máximo 128x128, nessa proporção parte da qualidade das imagens se perdiam, o que resultava em um péssimo resultado.
 
-### 📁 Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 📂 DRIVE
@@ -69,10 +69,10 @@ Este repositório descreve como importar datasets do **Kaggle** para o **Google 
     drive.mount('/content/drive')
 
 7. ### 📂 Organize os dados no Drive:
-Após montar o Drive, mova os arquivos extraídos:
+    Após montar o Drive, mova os arquivos extraídos:
    ```python
    !mv /content/drive_dataset /content/drive/MyDrive/DRIVE
-   ````
+  
 ## 🚀 Tecnologias Utilizadas
 
 - Python
@@ -121,8 +121,8 @@ Após montar o Drive, mova os arquivos extraídos:
         fov_masks.append(fov)
 
     return np.array(images), np.array(masks), np.array(fov_masks)
-```
-  
+````
+
 - Extração de patches (128x128 com stride 64): O código divide imagens grandes em pequenos blocos (patches). Só usa os patches onde há conteúdo relevante (máscara com valores > 0), isso reduz a quantidade de dados desnecessários e melhora o desempenho do modelo de segmentação.
 
 # Carregar os dados de treinamento
@@ -132,6 +132,8 @@ print(f"Imagens de treinamento carregadas: {train_images.shape}")
 print(f"Máscaras de treinamento carregadas: {train_masks.shape}")
   
 - Aumento de dados com `ImageDataGenerator`.
+  ### visulização das imagens geradas:
+  <img width="324" height="356" alt="image" src="https://github.com/user-attachments/assets/54b3a14c-adc1-419c-a13f-7cb0685e299f" />
 
 ## 🧠 Modelos Utilizados
 
@@ -144,12 +146,141 @@ print(f"Máscaras de treinamento carregadas: {train_masks.shape}")
 - **Skip connections:** liga diretamente camadas correspondentes do encoder ao decoder, preservando detalhes espaciais.
 
 > 🔎 Útil para tarefas com imagens médicas e dados limitados, oferece bons resultados com custo computacional moderado.
-
 ---
+```python
+   def build_unet(input_shape, num_classes=1):
+    inputs = layers.Input(shape=input_shape)
 
+    # Encoder
+    c1 = conv_block(inputs, 64)
+    p1 = layers.MaxPooling2D((2, 2))(c1)
+
+    c2 = conv_block(p1, 128)
+    p2 = layers.MaxPooling2D((2, 2))(c2)
+
+    c3 = conv_block(p2, 256)
+    p3 = layers.MaxPooling2D((2, 2))(c3)
+
+    c4 = conv_block(p3, 512)
+    p4 = layers.MaxPooling2D((2, 2))(c4)
+
+    c5 = conv_block(p4, 1024)
+
+    # Decoder
+    u6 = layers.Conv2DTranspose(512, (2, 2), strides=(2, 2), padding='same')(c5)
+    u6 = safe_concat([u6, c4])
+    c6 = conv_block(u6, 512)
+
+    u7 = layers.Conv2DTranspose(256, (2, 2), strides=(2, 2), padding='same')(c6)
+    u7 = safe_concat([u7, c3])
+    c7 = conv_block(u7, 256)
+
+    u8 = layers.Conv2DTranspose(128, (2, 2), strides=(2, 2), padding='same')(c7)
+    u8 = safe_concat([u8, c2])
+    c8 = conv_block(u8, 128)
+
+    u9 = layers.Conv2DTranspose(64, (2, 2), strides=(2, 2), padding='same')(c8)
+    u9 = safe_concat([u9, c1])
+    c9 = conv_block(u9, 64)
+
+    outputs = layers.Conv2D(num_classes, (1, 1), activation='sigmoid')(c9)
+
+    model_unet= models.Model(inputs=[inputs], outputs=[outputs])
+    return model
+```
 ### 🔶 U-Net++
 
 **U-Net++** é uma extensão da U-Net, com melhorias significativas para segmentações mais complexas.
+
+### Configurações do modelo unet++
+```python
+import tensorflow as tf
+
+# Função de bloco de convolução (2x Conv2D + BatchNorm + ReLU)
+def conv_block(x, filters):
+    x = layers.Conv2D(filters, (3, 3), padding='same')(x)
+    x = layers.BatchNormalization()(x)
+    x = layers.ReLU()(x)
+    x = layers.Conv2D(filters, (3, 3), padding='same')(x)
+    x = layers.BatchNormalization()(x)
+    x = layers.ReLU()(x)
+    return x
+
+# Concatenação segura que lida com tamanhos diferentes
+def safe_concat(tensors):
+    min_height = min(t.shape[1] for t in tensors)
+    min_width = min(t.shape[2] for t in tensors)
+    resized = [layers.Cropping2D(((0, t.shape[1] - min_height),
+                                  (0, t.shape[2] - min_width)))(t)
+               if t.shape[1] != min_height or t.shape[2] != min_width else t
+               for t in tensors]
+    return layers.Concatenate()(resized)
+
+# Função para construir a U-Net++
+
+def build_unet_plus_plus(input_shape, num_classes=1, deep_supervision=False):
+    inputs = layers.Input(shape=input_shape)
+    # Encoder
+    X_0_0 = conv_block(inputs, 64)
+    p0 = layers.MaxPooling2D((2, 2))(X_0_0)
+
+    X_1_0 = conv_block(p0, 128)
+    p1 = layers.MaxPooling2D((2, 2))(X_1_0)
+
+    X_2_0 = conv_block(p1, 256)
+    p2 = layers.MaxPooling2D((2, 2))(X_2_0)
+
+    X_3_0 = conv_block(p2, 512)
+    p3 = layers.MaxPooling2D((2, 2))(X_3_0)
+
+    X_4_0 = conv_block(p3, 1024)
+
+    # Decoder
+    u3_0 = layers.Conv2DTranspose(512, (2, 2), strides=(2, 2), padding='same')(X_4_0)
+    X_3_1 = conv_block(safe_concat([X_3_0, u3_0]), 512)
+
+    u2_0 = layers.Conv2DTranspose(256, (2, 2), strides=(2, 2), padding='same')(X_3_0)
+    X_2_1 = conv_block(safe_concat([X_2_0, u2_0]), 256)
+
+    u2_1 = layers.Conv2DTranspose(256, (2, 2), strides=(2, 2), padding='same')(X_3_1)
+    X_2_2 = conv_block(safe_concat([X_2_0, X_2_1, u2_1]), 256)
+
+    u1_0 = layers.Conv2DTranspose(128, (2, 2), strides=(2, 2), padding='same')(X_2_0)
+    X_1_1 = conv_block(safe_concat([X_1_0, u1_0]), 128)
+
+    u1_1 = layers.Conv2DTranspose(128, (2, 2), strides=(2, 2), padding='same')(X_2_1)
+    X_1_2 = conv_block(safe_concat([X_1_0, X_1_1, u1_1]), 128)
+
+    u1_2 = layers.Conv2DTranspose(128, (2, 2), strides=(2, 2), padding='same')(X_2_2)
+    X_1_3 = conv_block(safe_concat([X_1_0, X_1_1, X_1_2, u1_2]), 128)
+
+    u0_0 = layers.Conv2DTranspose(64, (2, 2), strides=(2, 2), padding='same')(X_1_0)
+    X_0_1 = conv_block(safe_concat([X_0_0, u0_0]), 64)
+
+    u0_1 = layers.Conv2DTranspose(64, (2, 2), strides=(2, 2), padding='same')(X_1_1)
+    X_0_2 = conv_block(safe_concat([X_0_0, X_0_1, u0_1]), 64)
+
+    u0_2 = layers.Conv2DTranspose(64, (2, 2), strides=(2, 2), padding='same')(X_1_2)
+    X_0_3 = conv_block(safe_concat([X_0_0, X_0_1, X_0_2, u0_2]), 64)
+
+    u0_3 = layers.Conv2DTranspose(64, (2, 2), strides=(2, 2), padding='same')(X_1_3)
+    X_0_4 = conv_block(safe_concat([X_0_0, X_0_1, X_0_2, X_0_3, u0_3]), 64)
+
+    # Deep Supervision
+    if deep_supervision:
+        outputs = [
+            layers.Conv2D(num_classes, (1, 1), activation="sigmoid")(X_0_1),
+            layers.Conv2D(num_classes, (1, 1), activation="sigmoid")(X_0_2),
+            layers.Conv2D(num_classes, (1, 1), activation="sigmoid")(X_0_3),
+            layers.Conv2D(num_classes, (1, 1), activation="sigmoid")(X_0_4),
+        ]
+        model = models.Model(inputs, outputs)
+    else:
+        output = layers.Conv2D(num_classes, (1, 1), activation="sigmoid")(X_0_4)
+        model = models.Model(inputs, output)
+
+    return model
+```
 
 #### Principais Diferenças:
 
@@ -180,6 +311,20 @@ print(f"Máscaras de treinamento carregadas: {train_masks.shape}")
 - Função de perda: `binary_crossentropy`
 - Métricas: `accuracy`, além de métricas personalizadas com base em segmentação binária
 - EarlyStopping e ModelCheckpoint utilizados para evitar overfitting.
+
+  ```python
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    checkpoint = tf.keras.callbacks.ModelCheckpoint("unetpp_drive_best.h5", save_best_only=True, monitor='val_loss')
+    early = tf.keras.callbacks.EarlyStopping(patience=10, restore_best_weights=True)
+    history = model.fit(
+        train_generator, # imagens geradas pela extração de patchs
+        steps_per_epoch=len(train_img_patches) // BATCH_SIZE, # imagens geradas com o ImageDataGenerator
+        epochs=EPOCHS,
+        validation_data=(val_img_patches, val_mask_patches),
+        callbacks=[checkpoint, early],
+    )
+
+model.save('/content/drive/MyDrive/modelo_unet.h5')
 
 ## 📊 Métricas Avaliadas
 
