@@ -56,21 +56,21 @@ Este repositório descreve como importar datasets do **Kaggle** para o **Google 
 4. ### ⬇️ Baixe o dataset desejado: https://www.kaggle.com/datasets/andrewmvd/drive-digital-retinal-images-for-vessel-extraction?resource=download
 
 ````python
-!kaggle datasets download -d aryashah2k/drive-dataset
+      !kaggle datasets download -d aryashah2k/drive-dataset
 ````
 5. ### 📦 Extraia o conteúdo:
 ````python
-!unzip drive-dataset.zip -d /content/drive_dataset
+      !unzip drive-dataset.zip -d /content/drive_dataset
 ````
 6. ### 🔗 Monte o Google Drive:
 ````python
-from google.colab import drive
-drive.mount('/content/drive')
+    from google.colab import drive
+    drive.mount('/content/drive')
 ````
 7. ### 📂 Organize os dados no Drive:
 Após montar o Drive, mova os arquivos extraídos:
 ````python
-!mv /content/drive_dataset /content/drive/MyDrive/DRIVE
+    !mv /content/drive_dataset /content/drive/MyDrive/DRIVE
 ## 🚀 Tecnologias Utilizadas
 ````
 ### Técnologias Utilizadas
