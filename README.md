@@ -124,12 +124,25 @@ Este repositório descreve como importar datasets do **Kaggle** para o **Google 
 ````
 
 - Extração de patches (128x128 com stride 64): O código divide imagens grandes em pequenos blocos (patches). Só usa os patches onde há conteúdo relevante (máscara com valores > 0), isso reduz a quantidade de dados desnecessários e melhora o desempenho do modelo de segmentação.
+  ```python
+     def create_patches(images, masks, patch_size=128, stride=64):
+    img_patches, mask_patches = [], []
+    img_h, img_w = images.shape[1], images.shape[2]
 
-# Carregar os dados de treinamento
-train_images, train_masks, train_fov_masks = load_data(train_images_dir, train_masks_dir, train_fov_dir)
+    for i in range(images.shape[0]):
+        for y in range(0, img_h - patch_size + 1, stride):
+            for x in range(0, img_w - patch_size + 1, stride):
+                img_patch = images[i, y:y+patch_size, x:x+patch_size]
+                mask_patch = masks[i, y:y+patch_size, x:x+patch_size]
+                if np.sum(mask_patch) > 0:
+                    img_patches.append(img_patch)
+                    mask_patches.append(mask_patch)
+    return np.array(img_patches), np.array(mask_patches)
 
-print(f"Imagens de treinamento carregadas: {train_images.shape}")
-print(f"Máscaras de treinamento carregadas: {train_masks.shape}")
+X_train, X_val, y_train, y_val = train_test_split(train_images, train_masks, test_size=0.1, random_state=42)
+
+train_img_patches, train_mask_patches = create_patches(X_train, y_train)
+val_img_patches, val_mask_patches = create_patches(X_val, y_val)
   
 - Aumento de dados com `ImageDataGenerator`.
   ### visulização das imagens geradas:
