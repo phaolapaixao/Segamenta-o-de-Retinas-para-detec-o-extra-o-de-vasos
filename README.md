@@ -1,10 +1,13 @@
 # Link do Projeto:
-(https://colab.research.google.com/drive/1G1bYMqgHySTBupL3LFSdbrB8uXosiKhp?usp=sharing)
+https://colab.research.google.com/drive/1G1bYMqgHySTBupL3LFSdbrB8uXosiKhp?usp=sharing
 
 # Segmentação de Vasos Retinianos com U-Net e U-Net++
 
 Este projeto utiliza redes neurais convolucionais U-Net e U-Net++ para segmentação de vasos sanguíneos em imagens da retina a partir do **DRIVE Dataset**. 
-O principal objetivo é utlizar o modelo unet++ para melhor precisão da retina em relação ao modelo unet convencional.
+O principal objetivo é utlizar o modelo unet++ para melhor precisão da retina em relação ao modelo unet convencional. 
+<img width="1398" height="674" alt="image" src="https://github.com/user-attachments/assets/dba4b11d-1588-4b60-a09d-1fc73b71aaaa" />
+
+Esse projeto é composto por 40 imagens, 20 de teste e 20 de treino, o que é pouco para um bom treinamento, por isso foi necessário gerar novos dados a partir das patches, as patchs foram essenciais para esse projeto, uma vez que as imagens originaris tinha proporções de 584x565, porem o colab tradicional limita para no máximo 128x128, nessa proporção parte da qualidade das imagens se perdiam, o que resultava em um péssimo resultado.
 
 ## 📁 Estrutura do Projeto
 
