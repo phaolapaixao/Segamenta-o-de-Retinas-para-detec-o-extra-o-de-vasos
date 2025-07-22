@@ -75,7 +75,6 @@ Após montar o Drive, mova os arquivos extraídos:
    ````
 ## 🚀 Tecnologias Utilizadas
 
-### Técnologias Utilizadas
 - Python
 - TensorFlow / Keras
 - NumPy
@@ -91,8 +90,46 @@ Após montar o Drive, mova os arquivos extraídos:
     Garantir que a máscara só indique presença (1.0) ou ausência (0.0) do objeto/estrutura de interesse.
     Facilitar o treino com modelos de segmentação binária, como U-Net ou SegNet.
     Evitar inconsistências nos dados vindos de arquivos de imagem.
+```python
+    def load_data(img_dir, mask_dir, fov_dir):
+    img_files = sorted(glob.glob(os.path.join(img_dir, "*.tif")))
+    mask_files = sorted(glob.glob(os.path.join(mask_dir, "*.gif")))
+    fov_files = sorted(glob.glob(os.path.join(fov_dir, "*.gif")))
+
+    images = []
+    masks = []
+    fov_masks = []
+
+    for img_path, mask_path, fov_path in zip(img_files, mask_files, fov_files):
+        # Carregar imagem e normalizar
+        img = Image.open(img_path).convert('RGB')
+        img = np.array(img, dtype=np.float32) / 255.0
+        images.append(img)
+
+        # Carregar máscara e binarizar
+        mask = Image.open(mask_path)
+        mask = np.array(mask, dtype=np.float32)
+        mask[mask > 0] = 1.0 # Garantir que seja 0 ou 1
+        mask = np.expand_dims(mask, axis=-1) # Adicionar canal
+        masks.append(mask)
+
+        # Carregar máscara de FOV e binarizar
+        fov = Image.open(fov_path)
+        fov = np.array(fov, dtype=np.float32)
+        fov[fov > 0] = 1.0
+        fov = np.expand_dims(fov, axis=-1)
+        fov_masks.append(fov)
+
+    return np.array(images), np.array(masks), np.array(fov_masks)
+```
   
 - Extração de patches (128x128 com stride 64): O código divide imagens grandes em pequenos blocos (patches). Só usa os patches onde há conteúdo relevante (máscara com valores > 0), isso reduz a quantidade de dados desnecessários e melhora o desempenho do modelo de segmentação.
+
+# Carregar os dados de treinamento
+train_images, train_masks, train_fov_masks = load_data(train_images_dir, train_masks_dir, train_fov_dir)
+
+print(f"Imagens de treinamento carregadas: {train_images.shape}")
+print(f"Máscaras de treinamento carregadas: {train_masks.shape}")
   
 - Aumento de dados com `ImageDataGenerator`.
 
