@@ -138,12 +138,12 @@ Este repositório descreve como importar datasets do **Kaggle** para o **Google 
                     img_patches.append(img_patch)
                     mask_patches.append(mask_patch)
     return np.array(img_patches), np.array(mask_patches)
-
-X_train, X_val, y_train, y_val = train_test_split(train_images, train_masks, test_size=0.1, random_state=42)
-
-train_img_patches, train_mask_patches = create_patches(X_train, y_train)
-val_img_patches, val_mask_patches = create_patches(X_val, y_val)
   
+  X_train, X_val, y_train, y_val = train_test_split(train_images, train_masks, test_size=0.1, random_state=42)
+  
+  train_img_patches, train_mask_patches = create_patches(X_train, y_train)
+  val_img_patches, val_mask_patches = create_patches(X_val, y_val)
+
 - Aumento de dados com `ImageDataGenerator`.
   ### visulização das imagens geradas:
   
