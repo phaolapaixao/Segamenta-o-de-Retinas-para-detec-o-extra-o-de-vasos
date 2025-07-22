@@ -339,8 +339,6 @@ def build_unet_plus_plus(input_shape, num_classes=1, deep_supervision=False):
         callbacks=[checkpoint, early],
     )
 
-model.save('/content/drive/MyDrive/modelo_unet.h5')
-
 ## 📊 Métricas Avaliadas
 
 As métricas utilizadas para comparar os modelos foram:
