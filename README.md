@@ -70,9 +70,9 @@ Este repositório descreve como importar datasets do **Kaggle** para o **Google 
 
 7. ### 📂 Organize os dados no Drive:
 Após montar o Drive, mova os arquivos extraídos:
-    ```python
-    !mv /content/drive_dataset /content/drive/MyDrive/DRIVE
-
+   ```python
+   !mv /content/drive_dataset /content/drive/MyDrive/DRIVE
+   ````
 ## 🚀 Tecnologias Utilizadas
 
 ### Técnologias Utilizadas
