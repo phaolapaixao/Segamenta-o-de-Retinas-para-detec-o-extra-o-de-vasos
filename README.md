@@ -9,10 +9,9 @@ O objetivo é identificar estruturas importantes – como vasos sanguíneos – 
 
 ### Visualização das imagens:
 
-<img width="1398" height="674" alt="image" src="https://github.com/user-attachments/assets/dba4b11d-1588-4b60-a09d-1fc73b71aaaa" />
+<img width="1215" height="574" alt="image" src="https://github.com/user-attachments/assets/ea9f2e90-8948-4011-86d9-1c229a100835" />
 
-<img width="1027" height="498" alt="image" src="https://github.com/user-attachments/assets/d1df78e0-b25d-4573-9442-8f96317a6eac" />
-
+<img width="1212" height="584" alt="image" src="https://github.com/user-attachments/assets/560d3367-3e80-46d9-86a9-3bc5ab481165" />
 
 Esse projeto é composto por 40 imagens, 20 de teste e 20 de treino, o que é pouco para um bom treinamento, por isso foi necessário gerar novos dados a partir das patches, as patchs foram essenciais para esse projeto, uma vez que as imagens originaris tinham proporções de 584x565, porem o colab tradicional limita para no máximo 128x128, nessa proporção parte da qualidade das imagens se perdiam, o que resultava em um péssimo resultado.
 
@@ -386,11 +385,18 @@ Este método apresenta os seguintes resultados:
 
 <img width="1167" height="393" alt="image" src="https://github.com/user-attachments/assets/14c8ad4d-3ea1-48fa-82c0-3b4800a86fb8" />
 
+<img width="1555" height="534" alt="image" src="https://github.com/user-attachments/assets/48e8bee7-173b-492b-88db-e0122c20d214" />
+
+<img width="1563" height="527" alt="image" src="https://github.com/user-attachments/assets/26e9b760-5ab7-48a7-9da4-4ffe017c30b7" />
+
 ## Unet:
 <img width="1174" height="425" alt="image" src="https://github.com/user-attachments/assets/3d5bbe00-5c2c-4999-bda2-3164ab2f1896" />
 
 <img width="1180" height="400" alt="image" src="https://github.com/user-attachments/assets/e6dbec7b-2078-4e3d-8f5d-e95ceb0c35c5" />
 
+<img width="1567" height="534" alt="image" src="https://github.com/user-attachments/assets/e40e8e5f-915d-4bce-b30e-47e6a72336e8" />
+
+<img width="1606" height="537" alt="image" src="https://github.com/user-attachments/assets/f2c50e18-aa13-4f5c-80c3-b74cf6c0c019" />
 
 ## 📊 Resultados das Métricas de Avaliação
 
@@ -419,7 +425,7 @@ U-Net++ teve melhor desempenho em todas as métricas, indicando que:
   
 Portanto, U-Net++ é a melhor escolha com base nesses resultados.
 
-### Comparaçõa das Imagens de ambos os modelos:
+### Comparaçõa das Imagens com ambos os modelos:
 <img width="1710" height="464" alt="image" src="https://github.com/user-attachments/assets/e836580d-1b74-40cc-a9db-3acde81a2d17" />
 ---
 
