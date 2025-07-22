@@ -49,31 +49,32 @@ Este repositório descreve como importar datasets do **Kaggle** para o **Google 
    from google.colab import files
    files.upload()  # selecione o arquivo kaggle.json
 3. ### 📁 Configure o ambiente do Kaggle no Colab:
-   ````python
+   ```python
       !mkdir -p ~/.kaggle
       !cp kaggle.json ~/.kaggle/
       !chmod 600 ~/.kaggle/kaggle.json
 4. ### ⬇️ Baixe o dataset desejado:
    https://www.kaggle.com/datasets/andrewmvd/drive-digital-retinal-images-for-vessel-extraction?resource=download
 
-````python
+   ```python
       !kaggle datasets download -d aryashah2k/drive-dataset
-````
+
 5. ### 📦 Extraia o conteúdo:
-````python
+   ```python
       !unzip drive-dataset.zip -d /content/drive_dataset
-````
+
 6. ### 🔗 Monte o Google Drive:
-````python
+   ```python
     from google.colab import drive
     drive.mount('/content/drive')
-````
+
 7. ### 📂 Organize os dados no Drive:
 Após montar o Drive, mova os arquivos extraídos:
-````python
+    ```python
     !mv /content/drive_dataset /content/drive/MyDrive/DRIVE
+
 ## 🚀 Tecnologias Utilizadas
-````
+
 ### Técnologias Utilizadas
 - Python
 - TensorFlow / Keras
