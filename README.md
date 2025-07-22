@@ -11,6 +11,9 @@ O objetivo é identificar estruturas importantes – como vasos sanguíneos – 
 
 <img width="1398" height="674" alt="image" src="https://github.com/user-attachments/assets/dba4b11d-1588-4b60-a09d-1fc73b71aaaa" />
 
+<img width="1027" height="498" alt="image" src="https://github.com/user-attachments/assets/d1df78e0-b25d-4573-9442-8f96317a6eac" />
+
+
 Esse projeto é composto por 40 imagens, 20 de teste e 20 de treino, o que é pouco para um bom treinamento, por isso foi necessário gerar novos dados a partir das patches, as patchs foram essenciais para esse projeto, uma vez que as imagens originaris tinham proporções de 584x565, porem o colab tradicional limita para no máximo 128x128, nessa proporção parte da qualidade das imagens se perdiam, o que resultava em um péssimo resultado.
 
 ## 📁 Estrutura do Projeto
