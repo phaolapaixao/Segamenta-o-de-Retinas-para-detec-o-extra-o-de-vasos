@@ -25,8 +25,50 @@ Esse projeto é composto por 40 imagens, 20 de teste e 20 de treino, o que é po
  │   ├── images          
  │   └── mask          
 ```
+# 📂 Organização do Dataset - Kaggle para Google Drive
 
+Este repositório descreve como importar datasets do **Kaggle** para o **Google Drive**, mantendo uma estrutura organizada para treinamento e teste de modelos de segmentação como U-Net e U-Net++.
+
+---
+
+## 📥 Como importar o dataset do Kaggle para o Google Drive
+
+1. ### ✅ Obtenha sua API key do Kaggle:
+   - Vá até [https://www.kaggle.com](https://www.kaggle.com)
+   - Clique na sua foto de perfil → *Account*
+   - Role até **API** e clique em **"Create New API Token"**
+   - Isso fará o download de um arquivo chamado `kaggle.json`
+
+2. ### 🔐 Faça upload da chave para o seu Colab:
+   No início do notebook, execute:
+   ```python
+   from google.colab import files
+   files.upload()  # selecione o arquivo kaggle.json
+3. ### 📁 Configure o ambiente do Kaggle no Colab:
+   ````python
+      !mkdir -p ~/.kaggle
+      !cp kaggle.json ~/.kaggle/
+      !chmod 600 ~/.kaggle/kaggle.json
+4. ### ⬇️ Baixe o dataset desejado: https://www.kaggle.com/datasets/andrewmvd/drive-digital-retinal-images-for-vessel-extraction?resource=download
+
+````python
+!kaggle datasets download -d aryashah2k/drive-dataset
+````
+5. ### 📦 Extraia o conteúdo:
+````python
+!unzip drive-dataset.zip -d /content/drive_dataset
+````
+6. ### 🔗 Monte o Google Drive:
+````python
+from google.colab import drive
+drive.mount('/content/drive')
+````
+7. 📂 Organize os dados no Drive:
+Após montar o Drive, mova os arquivos extraídos:
+````python
+!mv /content/drive_dataset /content/drive/MyDrive/DRIVE
 ## 🚀 Tecnologias Utilizadas
+````
 
 - Python
 - TensorFlow / Keras
