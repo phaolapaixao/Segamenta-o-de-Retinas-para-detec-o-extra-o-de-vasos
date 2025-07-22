@@ -379,7 +379,7 @@ Este método apresenta os seguintes resultados:
 <img width="1180" height="400" alt="image" src="https://github.com/user-attachments/assets/e6dbec7b-2078-4e3d-8f5d-e95ceb0c35c5" />
 
 
-## 📊 Métricas de Avaliação
+## 📊 Resultados das Métricas de Avaliação
 
 ### 🔹 U-Net
 - **Loss média:** 0.0973  
