@@ -16,7 +16,7 @@ O objetivo é identificar estruturas importantes – como vasos sanguíneos – 
 
 Esse projeto é composto por 40 imagens, 20 de teste e 20 de treino, o que é pouco para um bom treinamento, por isso foi necessário gerar novos dados a partir das patches, as patchs foram essenciais para esse projeto, uma vez que as imagens originaris tinham proporções de 584x565, porem o colab tradicional limita para no máximo 128x128, nessa proporção parte da qualidade das imagens se perdiam, o que resultava em um péssimo resultado.
 
-## 📁 Estrutura do Projeto
+# 📁 Estrutura do Projeto
 
 ```
 📂 DRIVE
