@@ -440,6 +440,10 @@ Ao utilizar as proporções 128x128 sem a extração de patchs, o resultado fica
 
 ---
 
+## Melhorias
+
+Analisando o projeto, acredito que para melhor resultado seja necessário fazer uma geração de dados mais precisa ou importar novas imagens para treinamento. 
+
 ## 📎 Referência
 
 - Dataset: [DRIVE - Digital Retinal Images for Vessel Extraction](https://www.kaggle.com/datasets/andrewmvd/drive-digital-retinal-images-for-vessel-extraction?resource=download)
