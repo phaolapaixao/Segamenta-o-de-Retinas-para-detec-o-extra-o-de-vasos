@@ -137,13 +137,13 @@ Este método apresenta os seguintes resultados:
 
 ## 📦 Resultados
 
-##Unet++:
+## Unet++:
 
 <img width="1182" height="379" alt="image" src="https://github.com/user-attachments/assets/c03a1a96-b436-4cd6-9cab-aa7bdb4424db" />
 
 <img width="1167" height="393" alt="image" src="https://github.com/user-attachments/assets/14c8ad4d-3ea1-48fa-82c0-3b4800a86fb8" />
 
-##Unet:
+## Unet:
 <img width="1174" height="425" alt="image" src="https://github.com/user-attachments/assets/3d5bbe00-5c2c-4999-bda2-3164ab2f1896" />
 
 <img width="1180" height="400" alt="image" src="https://github.com/user-attachments/assets/e6dbec7b-2078-4e3d-8f5d-e95ceb0c35c5" />
