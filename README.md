@@ -53,7 +53,8 @@ Este repositório descreve como importar datasets do **Kaggle** para o **Google 
       !mkdir -p ~/.kaggle
       !cp kaggle.json ~/.kaggle/
       !chmod 600 ~/.kaggle/kaggle.json
-4. ### ⬇️ Baixe o dataset desejado: https://www.kaggle.com/datasets/andrewmvd/drive-digital-retinal-images-for-vessel-extraction?resource=download
+4. ### ⬇️ Baixe o dataset desejado:
+   https://www.kaggle.com/datasets/andrewmvd/drive-digital-retinal-images-for-vessel-extraction?resource=download
 
 ````python
       !kaggle datasets download -d aryashah2k/drive-dataset
