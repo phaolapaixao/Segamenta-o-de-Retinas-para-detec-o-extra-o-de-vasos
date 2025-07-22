@@ -398,24 +398,26 @@ Este método apresenta os seguintes resultados:
 - **AUC-ROC média:** 0.9840  
 
 U-Net++ teve melhor desempenho em todas as métricas, indicando que:
-
-Ela erra menos (menor loss),
-
-Classifica com maior precisão geral (acurácia),
-
-Tem maior sensibilidade (detecta melhor os positivos),
-
-Maior especificidade (detecta melhor os negativos),
-
-E melhor separação entre classes (AUC-ROC).
-
+- Ela erra menos (menor loss),
+- Classifica com maior precisão geral (acurácia),
+- Tem maior sensibilidade (detecta melhor os positivos),
+- Maior especificidade (detecta melhor os negativos),
+- Melhor separação entre classes (AUC-ROC).
+  
 Portanto, U-Net++ é a melhor escolha com base nesses resultados.
 
+### Comparaçõa das Imagens de ambos os modelos:
+<img width="1710" height="464" alt="image" src="https://github.com/user-attachments/assets/e836580d-1b74-40cc-a9db-3acde81a2d17" />
 ---
 
 ## 📌 Observação
 
 O `threshold=0.1` foi utilizado para binarizar as predições. Isso ajuda a captar vasos mais finos, mas deve ser ajustado conforme necessário. Um valor muito baixo pode aumentar o número de falsos positivos.
+
+Para visualização as imagens deve ter o tamanho próximo ao originais, apenas para o treinamento, foi feito com proporções 128x128.
+Ao utilizar as proporções 128x128 sem a extração de patchs, o resultado fica assim:
+
+<img width="873" height="313" alt="image" src="https://github.com/user-attachments/assets/74c5e370-b546-4893-b69a-9a66104d4352" />
 
 ---
 
