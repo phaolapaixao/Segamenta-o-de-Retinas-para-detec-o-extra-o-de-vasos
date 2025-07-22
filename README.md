@@ -408,6 +408,8 @@ Este método apresenta os seguintes resultados:
 - **Especificidade média:** 0.9263  
 - **AUC-ROC média:** 0.9840  
 
+## Conclusão
+
 U-Net++ teve melhor desempenho em todas as métricas, indicando que:
 - Ela erra menos (menor loss),
 - Classifica com maior precisão geral (acurácia),
@@ -425,7 +427,7 @@ Portanto, U-Net++ é a melhor escolha com base nesses resultados.
 
 O `threshold=0.1` foi utilizado para binarizar as predições. Isso ajuda a captar vasos mais finos, mas deve ser ajustado conforme necessário. Um valor muito baixo pode aumentar o número de falsos positivos.
 
-Para visualização as imagens deve ter o tamanho próximo ao originais, apenas para o treinamento, foi feito com proporções 128x128.
+Para visualização as imagens deve ter o tamanho próximo ao original, apenas para o treinamento foi feito com proporções 128x128.
 Ao utilizar as proporções 128x128 sem a extração de patchs, o resultado fica assim:
 
 <img width="873" height="313" alt="image" src="https://github.com/user-attachments/assets/74c5e370-b546-4893-b69a-9a66104d4352" />
