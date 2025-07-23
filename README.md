@@ -455,6 +455,6 @@ Analisando o projeto, acredito que para melhor resultado seja necessário fazer 
 ## 🧑‍💻 Autor
 
 - **Phaola Paraguai Da Paixão Lustosa**
-- Email: <paxaophaola@gmail.com>
+- Email: <paixaophaola@gmail.com>
 
 ---
